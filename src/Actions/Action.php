@@ -44,7 +44,7 @@ class Action
     public function __construct()
     {
         if($this->is_native) {
-            add_action($this->action, array($this, 'handle'));
+            add_action($this->action, [$this, 'handle']);
         } else {
             add_action( 'admin_post_holrayunits_' . $this->action, [$this, '_handle'] );
         }

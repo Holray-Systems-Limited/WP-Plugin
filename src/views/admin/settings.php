@@ -1,6 +1,42 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><?php echo __("Settings", "holray-units"); ?></h1>
+    <h1 class="wp-heading-inline"><?php echo __("Settings & Sync", "holray-units"); ?></h1>
     <div class="metabox-holder">
+        
+        <?php if($holray_url === '' || $api_key === '') : ?>
+            <div class="postbox">
+                <div class="postbox-header">
+                    <h2 class="hndle"><?php echo __("API Details Required", "holray-units"); ?></h2>
+                </div>
+                <div class="inside">
+                    <p>
+                        <?php echo __("To sync your units, please enter your Holray API URL and your Holray API key.", "holray-units");?>
+                    </p>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="postbox">
+                <div class="postbox-header">
+                    <h2 class="hndle"><?php echo __("Sync Units", "holray-units"); ?></h2>
+                </div>
+                <div class="inside">
+                    <form action="admin-post.php" method="POST">
+                        <?php echo \Holray\Plugin\Plugin::getInstance()->getActions()["sync_with_holray"]->get_form(); ?>
+                        <p>
+                            <?php echo __("Click the button below to sync your units, locations and companies from Holray.", "holray-units"); ?>
+                        </p>
+                        <p>
+                            <strong>
+                                <?php echo __("Last synced: ", "holray-units"); ?>
+                                <?php echo is_null($last_sync) ? __("Never", "holray-units") : $last_sync;?>
+                            </strong>
+                        </p>
+                        <p>
+                            <button type="submit" class="button button-primary"><?php esc_html_e('Sync With Holray', 'holray-units'); ?></button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        <?php endif; ?>
 
         <div class="postbox">
             <div class="postbox-header">
@@ -12,10 +48,10 @@
                     <table class="form-table" role="presentation">
                         <tr>
                             <th>
-                                <label for="holray_units_api_base"><?php esc_html_e('Holray API Base (api.php URL)', 'holray-units'); ?></label>
+                                <label for="holray_url"><?php esc_html_e('Holray URL', 'holray-units'); ?></label>
                             </th>
                             <td>
-                                <input type="url" class="regular-text code" id="holray_units_api_base" name="holray_units_api_base" value="<?php echo $api_base; ?>" placeholder="https://YOUR.holray.co.uk/public/api.php" />
+                                <input type="url" class="regular-text code" id="holray_url" name="holray_units_holray_url" value="<?php echo $holray_url; ?>" placeholder="https://YOUR.holray.co.uk/" />
                             </td>
                         </tr>
                         <tr>
@@ -24,15 +60,6 @@
                             </th>
                             <td>
                                 <input type="text" class="regular-text" id="holray_units_api_key" name="holray_units_api_key" value="<?php echo $api_key; ?>" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label for="holray_units_checkout_base"><?php esc_html_e('Checkout URL (optional)', 'holray-units'); ?></label>
-                            </th>
-                            <td>
-                                <input type="url" class="regular-text code" id="holray_units_checkout_base" name="holray_units_checkout_base" value="<?php echo $checkout; ?>" placeholder="https://YOUR.holray.co.uk/public/custbook1.php" />
-                                <p class="description"><?php esc_html_e('If blank, the plugin will infer this from the API base URL.', 'holray-units'); ?></p>
                             </td>
                         </tr>
                     </table>
@@ -114,5 +141,4 @@
         </div>
 
     </div>
-    </form>
 </div>

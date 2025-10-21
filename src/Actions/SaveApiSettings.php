@@ -27,14 +27,11 @@ class SaveApiSettings extends Action
      * @return void
      */
     public function handle() {
-        if(Request::has("api_base")) {
-            Plugin::setOption('api_base', Request::inputUrl('api_base', 'https://YOUR.holray.co.uk'));
+        if(Request::has("holray_url")) {
+            Plugin::setOption('holray_url', Request::inputUrl('holray_url', 'https://YOUR.holray.co.uk'));
         }
         if(Request::has("api_key")) {
             Plugin::setOption('api_key', Request::input('api_key', ''));
-        }
-        if(Request::has("checkout_base")) {
-            Plugin::setOption('checkout_base', Request::input('checkout_base', ''));
         }
         return $this->redirect( $this->base_url . '&holray-message=api-success' );
     }
