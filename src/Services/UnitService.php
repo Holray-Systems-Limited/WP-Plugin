@@ -64,7 +64,14 @@ class UnitService {
             if($existing_units->have_posts()) {
                 $wp_unit = $existing_units->posts[0];
             } else {
+                $slug = sanitize_title($holray_unit->unit);
+
+                if(isset($holray_unit->class) && !is_null($holray_unit->class) && $holray_unit->class !== "") {
+                    $slug = sanitize_title($holray_unit->class . " " . $holray_unit->unit);
+                }
+
                 $new_post_id = wp_insert_post([
+                    'post_name' => $slug,
                     'post_title' => $holray_unit->unit,
                     'post_content' => $holray_unit->unitdesc,
                     'post_status' => 'publish',

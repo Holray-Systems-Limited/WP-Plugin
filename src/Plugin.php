@@ -64,6 +64,7 @@ class Plugin {
 
         // Enqueue css and scripts required
         add_action("admin_enqueue_scripts", [ $this, "init_admin_css" ]);
+        add_action("wp_enqueue_scripts", [ $this, "init_frontend_css" ]);
     }
 
     /**
@@ -181,6 +182,14 @@ class Plugin {
     public function init_admin_css()
     {
         wp_enqueue_style( 'holray_admin_css', HOLRAY_UNITS_URL . '/src/css/admin.css', false, HOLRAY_UNITS_VERSION );
+    }
+
+    /**
+     * Load the frontend (single and archive) CSS
+     */
+    public function init_frontend_css()
+    {
+        wp_enqueue_style( 'holray_css', HOLRAY_UNITS_URL . '/src/css/holray.css', false, HOLRAY_UNITS_VERSION );
     }
     
 }

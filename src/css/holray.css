@@ -1,0 +1,234 @@
+/*
+* Name: Holray CSS
+* Description: Provides CSS to the frontend for archive and unit pages.
+*/
+
+/* Container CSS */
+.holray-container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 2rem;
+}
+@media (min-width: 768px) {
+    .holray-container {
+        width: 700px
+    }
+}
+@media (min-width: 1200px) {
+    .holray-container {
+        width: 1100px
+    }
+}
+@media (min-width: 1440px) {
+    .holray-container {
+        width: 1390px
+    }
+}
+
+/* Holray Unit Single Page CSS */
+.holray-unit-single .holray-unit-image-container .holray-unit-image {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+.holray-unit-single .holray-unit-details {
+    margin-top: 1rem;
+}
+.holray-unit-single .holray-unit-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+/* Locations CSS */
+.holray-unit-single .holray-unit-locations {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: 0 0 1.5rem 0;
+    list-style: none;
+    padding: 0;
+}
+.holray-unit-single .holray-unit-locations .holray-unit-location {
+    display: block;
+    text-align: center;
+    padding: .25rem .5rem;
+    border-radius: .5rem;
+    font-size: .875rem;
+    background-color: #ebebeb;
+    color: #454545;
+    font-weight: 500;
+}
+/* Meta CSS */
+.holray-unit-single .holray-unit-features {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+.holray-unit-single .holray-unit-features .holray-unit-feature--name{
+    font-size: .75rem;
+    font-weight: bold;
+    color: #454545;
+    text-transform: uppercase;
+}
+/* Unit Check Availablity Btn */
+.holray-unit-single .holray-unit-btn-mobile .holray-unit-btn {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+.holray-unit-single .holray-unit-btn-desktop {
+    display: none;
+}
+
+/* Responsive Unit Page */
+@media (min-width: 768px) {
+    .holray-unit-single .holray-unit-image-container .holray-unit-image {
+        height: 425px;
+    }
+    /* Locations CSS */
+    .holray-unit-single .holray-unit-locations {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    /* Meta CSS */
+    .holray-unit-single .holray-unit-features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    /* Unit check availablity button */
+    .holray-unit-single .holray-unit-btn-mobile {
+        display: none;
+    }
+    .holray-unit-single .holray-unit-btn-desktop {
+        display: block;
+    }
+}
+@media (min-width: 1200px) {
+    .holray-unit-single .holray-unit-image-container .holray-unit-image {
+        height: 400px;
+    }
+}
+
+/* The Archive Page */
+.holray-unit-archive {
+    padding: 2rem 0;
+}
+.holray-unit-archive .holray-title {
+    margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.holray-unit-btn {
+    display: inline-flex;
+    text-align: center;
+    padding: .65rem 1rem;
+    border-radius: .75rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+}
+.holray-unit-btn:hover {
+    text-decoration: none;
+}
+.holray-unit-btn.holray-unit-btn-primary {
+    background-color: #000;
+    color: #fff;
+}
+
+/* General titles */
+.holray-title {
+    font-size: 2rem;
+    margin: 0rem 0 .5rem 0;
+    line-height: 1.4;
+}
+@media (min-width: 768px) {
+    .holray-title {
+        font-size: 2.5rem;
+        margin: 0rem 0 .75rem 0;
+    }
+}
+
+/* Archive Layout (used for archive and search results) */
+.holray-archive-layout {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+}
+@media (min-width: 768px) {
+    .holray-archive-layout {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1200px) {
+    .holray-archive-layout {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 1440px) {
+    .holray-archive-layout {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+/* Holray Cards (used for displaying units in a list) */
+.holray-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #ebebeb;
+    border-radius: .5rem;
+    color: #000;
+    text-decoration: none;
+    transition: 250ms ease box-shadow;
+}
+.holray-card:hover, .holray-card:active {
+    text-decoration: none;
+    color: #000;
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, .1);
+}
+.holray-card .holray-card-image-placeholder,
+.holray-card .holray-card-image {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    background-color: #ebebeb;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    aspect-ratio: 2 / 1;
+    margin: 0;
+}
+.holray-card .holray-card-inner {
+    padding: 1rem;
+}
+.holray-card h3 {
+    margin: 0 0 .15rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.holray-card .holray-card-class {
+    font-size: .875rem;
+    color: #7a7a7a;
+    margin-bottom: .5rem;
+    font-weight: 500;
+}
+.holray-card .holray-card-excerpt {
+    font-size: 1rem;
+}
+
+@media (min-width: 1200px) {
+    .holray-card .holray-card-image-placeholder,
+    .holray-card .holray-card-image {
+        aspect-ratio: 5 / 3;
+    }
+    .holray-card h3 {
+        margin: 0 0 .2rem 0;
+        font-size: 1.75rem;
+    }
+    .holray-card .holray-card-inner {
+        padding: 1.25rem;
+    }
+}
