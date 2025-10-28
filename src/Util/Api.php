@@ -118,10 +118,11 @@ class Api
             "headers" => [
                 "Content-Type" => "application/json"
             ],
-            "body" => wp_json_encode($body),
+            "body" => $body,
         ]);
 
         return $this->handle_response($response);
 
     }
+    
 }

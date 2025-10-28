@@ -30,7 +30,7 @@ class UpdateUnit extends Action
      */
     public function handle() {
         global $post; 
-        if ($post->post_type != 'holray_unit'){
+        if (is_null($post) || $post->post_type != 'holray_unit'){
             return;
         }
 

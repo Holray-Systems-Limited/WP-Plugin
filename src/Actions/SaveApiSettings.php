@@ -33,6 +33,13 @@ class SaveApiSettings extends Action
         if(Request::has("api_key")) {
             Plugin::setOption('api_key', Request::input('api_key', ''));
         }
+        if(Request::has("api_caching")) {
+            Plugin::setOption('api_caching', 1);
+        } else {
+            Plugin::setOption('api_caching', 0);
+        }
+
+        
         return $this->redirect( $this->base_url . '&holray-message=api-success' );
     }
 }

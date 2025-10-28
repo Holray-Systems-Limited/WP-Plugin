@@ -4,7 +4,7 @@ namespace Holray\Plugin\Actions;
 use Holray\Plugin\Plugin;
 use Holray\Plugin\Util\Request;
 
-class SaveLegacySettings extends Action
+class SaveSearchResultsSettings extends Action
 {
 
     /**
@@ -12,7 +12,7 @@ class SaveLegacySettings extends Action
      * 
      * @var string
      */
-    public $action = "save_legacy_settings";
+    public $action = "save_search_results_settings";
 
     /**
      * The base page url
@@ -27,9 +27,9 @@ class SaveLegacySettings extends Action
      * @return void
      */
     public function handle() {
-        if(Request::has("legacy_api_url")) {
-            Plugin::setOption('legacy_api_url', Request::inputUrl('legacy_api_url', ''));
+        if(Request::has("search_results_page")) {
+            Plugin::setOption('search_results_page', Request::input('search_results_page', '0'));
         }
-        return $this->redirect( $this->base_url . '&holray-message=legacy-success' );
+        return $this->redirect( $this->base_url . '&holray-message=search-success' );
     }
 }

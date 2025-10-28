@@ -15,8 +15,8 @@ get_header();
                 <h1 class="holray-unit-title"><?php echo esc_html(get_post_meta(get_the_ID(), "holray_class", true) . " " . get_the_title()); ?></h1>
 
                 <?php if(get_post_meta(get_the_ID(), "holray_external_booking_url", true)): ?>
-                    <div class="holray-unit-btn-wrapper holray-unit-btn-desktop">
-                        <a href="<?php echo esc_url(get_post_meta(get_the_ID(), "holray_external_booking_url", true)); ?>" class="holray-unit-btn holray-unit-btn-primary"><?php echo __("Check Availability", "holray-units"); ?></a>
+                    <div class="holray-btn-wrapper holray-btn-desktop">
+                        <a href="<?php echo esc_url(get_post_meta(get_the_ID(), "holray_external_booking_url", true)); ?>" class="holray-btn holray-btn-primary"><?php echo __("Check Availability", "holray-units"); ?></a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -75,8 +75,8 @@ get_header();
             </div>
 
             <?php if(get_post_meta(get_the_ID(), "holray_external_booking_url", true)): ?>
-                <div class="holray-unit-btn-wrapper holray-unit-btn-mobile">
-                    <a href="<?php echo esc_url(get_post_meta(get_the_ID(), "holray_external_booking_url", true)); ?>" class="holray-unit-btn holray-unit-btn-primary"><?php echo __("Check Availability", "holray-units"); ?></a>
+                <div class="holray-btn-wrapper holray-btn-mobile">
+                    <a href="<?php echo esc_url(get_post_meta(get_the_ID(), "holray_external_booking_url", true)); ?>" class="holray-btn holray-btn-primary"><?php echo __("Check Availability", "holray-units"); ?></a>
                 </div>
             <?php endif; ?>
         </div>

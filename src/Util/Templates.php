@@ -2,6 +2,7 @@
 
 namespace Holray\Plugin\Util;
 
+use Holray\Plugin\Plugin;
 
 class Templates
 {
@@ -30,6 +31,11 @@ class Templates
 
         if(is_post_type_archive('holray_unit')) {
             $tpl = self::locate_template("archive-holray_unit.php");
+        }
+
+        // Load our custom template for search results too.
+        if(get_the_ID() == Plugin::getOption("search_results_page", "0")) {
+            $tpl = self::locate_template("holray-search-results.php");
         }
 
         // If (for whatever reason) the template doesn't exist in our plugin.. use the WordPress default to prevent a white screen.

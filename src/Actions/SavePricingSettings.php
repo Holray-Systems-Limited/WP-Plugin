@@ -27,9 +27,6 @@ class SavePricingSettings extends Action
      * @return void
      */
     public function handle() {
-        if(Request::has("enforce_online_cta")) {
-            Plugin::setOption('enforce_online_cta', Request::input('enforce_online_cta', '1'));
-        }
         if(Request::has("currency_symbol")) {
             Plugin::setOption('currency_symbol', Request::input('currency_symbol', '£'));
         }
@@ -43,7 +40,7 @@ class SavePricingSettings extends Action
             Plugin::setOption('decimal_sep', Request::input('decimal_sep', '.'));
         }
         if(Request::has("decimals")) {
-            Plugin::setOption('decimals', Request::input('decimals', '.'));
+            Plugin::setOption('decimals', Request::input('decimals', '2'));
         }
 
         return $this->redirect( $this->base_url . '&holray-message=pricing-success' );

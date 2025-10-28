@@ -54,15 +54,17 @@ class Settings extends Page
     public function render()
     {
 
-        $api_url = esc_url(Plugin::getOption('legacy_api_url',''));
         $holray_url = esc_url(Plugin::getOption('holray_url',''));
         $api_key = esc_attr(Plugin::getOption('api_key',''));
-        $enforce  = (int) Plugin::getOption('enforce_online_cta', 1);
+        $api_caching  = (int) Plugin::getOption('api_caching', 1);
+
         $sym = Plugin::getOption('currency_symbol', '£');
         $pos = Plugin::getOption('currency_position', 'left');
         $tsep = Plugin::getOption('thousand_sep', ',');
         $dsep = Plugin::getOption('decimal_sep', '.');
         $decs = (int) Plugin::getOption('decimals', 2);
+
+        $search_results_page_id = Plugin::getOption('search_results_page','0');
 
         $last_sync = null;
         if(Plugin::getOption('last_unit_sync', false)) {

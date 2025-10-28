@@ -2,13 +2,14 @@
 namespace Holray\Plugin;
 
 use Holray\Plugin\Actions\SaveApiSettings;
-use Holray\Plugin\Actions\SaveLegacySettings;
 use Holray\Plugin\Actions\SavePricingSettings;
+use Holray\Plugin\Actions\SaveSearchResultsSettings;
 use Holray\Plugin\Actions\Sync;
 use Holray\Plugin\Actions\Wp\UpdateUnit;
 use Holray\Plugin\Metabox\UnitFields;
 use Holray\Plugin\Pages\Settings;
 use Holray\Plugin\PostTypes\Unit;
+use Holray\Plugin\Shortcodes\HolraySearch;
 use Holray\Plugin\Util\Api;
 use Holray\Plugin\Util\Templates;
 
@@ -49,9 +50,13 @@ class Plugin {
         $this->init_taxonomies();
         $this->init_actions();
         $this->init_metaboxes();
+        $this->init_shortcodes();
 
         // Add the filter for our custom settings variables
         add_filter("query_vars", [ $this, "init_custom_query_vars" ]);
+
+        // Add the post state indicators to pages in wp-admin
+        add_filter("display_post_states", [ $this, "add_post_states" ], 10, 2);
 
         // Setup the api instance.
         $this->api = new Api(self::getOption("holray_url"), self::getOption("api_key"));
@@ -65,6 +70,7 @@ class Plugin {
         // Enqueue css and scripts required
         add_action("admin_enqueue_scripts", [ $this, "init_admin_css" ]);
         add_action("wp_enqueue_scripts", [ $this, "init_frontend_css" ]);
+        add_action("wp_enqueue_scripts", [ $this, "init_frontend_js" ]);
     }
 
     /**
@@ -101,7 +107,7 @@ class Plugin {
         $this->actions["save_unit_fields"] = new UpdateUnit;
         $this->actions["save_api_settings"] = new SaveApiSettings;
         $this->actions["save_pricing_settings"] = new SavePricingSettings;
-        $this->actions["save_legacy_settings"] = new SaveLegacySettings;
+        $this->actions["save_search_results_settings"] = new SaveSearchResultsSettings;
 
         $this->actions["sync_with_holray"] = new Sync;
     }
@@ -112,6 +118,27 @@ class Plugin {
     private function init_metaboxes()
     {
         new UnitFields;
+    }
+
+    /**
+     * Init the available shortcodes
+     */
+    private function init_shortcodes()
+    {
+        new HolraySearch;
+    }
+
+    /**
+     * Init the post states (adds a custom indicator next to each page)
+     */
+    public function add_post_states($post_states, $post)
+    {
+        $page_id = intval(Plugin::getOption("search_results_page", "0"));
+        if($post->ID == $page_id) {
+            $post_states["holray_results_page"] = __("Holray Search Results", "holray_units");
+        }
+
+        return $post_states;
     }
 
     /**
@@ -190,6 +217,14 @@ class Plugin {
     public function init_frontend_css()
     {
         wp_enqueue_style( 'holray_css', HOLRAY_UNITS_URL . '/src/css/holray.css', false, HOLRAY_UNITS_VERSION );
+    }
+
+    /**
+     * Load the frontend (search form) JS
+     */
+    public function init_frontend_js()
+    {
+        wp_enqueue_script( 'holray_js', HOLRAY_UNITS_URL . '/src/js/holray.js', false, HOLRAY_UNITS_VERSION, true );
     }
     
 }

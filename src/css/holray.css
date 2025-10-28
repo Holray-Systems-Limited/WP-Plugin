@@ -10,16 +10,19 @@
     margin-right: auto;
     padding-bottom: 2rem;
 }
+
 @media (min-width: 768px) {
     .holray-container {
         width: 700px
     }
 }
+
 @media (min-width: 1200px) {
     .holray-container {
         width: 1100px
     }
 }
+
 @media (min-width: 1440px) {
     .holray-container {
         width: 1390px
@@ -34,14 +37,17 @@
     object-fit: cover;
     object-position: center;
 }
+
 .holray-unit-single .holray-unit-details {
     margin-top: 1rem;
 }
+
 .holray-unit-single .holray-unit-header {
     display: flex;
     justify-content: space-between;
     gap: 1.5rem;
 }
+
 /* Locations CSS */
 .holray-unit-single .holray-unit-locations {
     display: flex;
@@ -51,6 +57,7 @@
     list-style: none;
     padding: 0;
 }
+
 .holray-unit-single .holray-unit-locations .holray-unit-location {
     display: block;
     text-align: center;
@@ -61,25 +68,29 @@
     color: #454545;
     font-weight: 500;
 }
+
 /* Meta CSS */
 .holray-unit-single .holray-unit-features {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
 }
-.holray-unit-single .holray-unit-features .holray-unit-feature--name{
+
+.holray-unit-single .holray-unit-features .holray-unit-feature--name {
     font-size: .75rem;
     font-weight: bold;
     color: #454545;
     text-transform: uppercase;
 }
+
 /* Unit Check Availablity Btn */
-.holray-unit-single .holray-unit-btn-mobile .holray-unit-btn {
+.holray-unit-single .holray-btn-mobile .holray-btn {
     display: block;
     width: 100%;
     margin-top: 1.5rem;
 }
-.holray-unit-single .holray-unit-btn-desktop {
+
+.holray-unit-single .holray-btn-desktop {
     display: none;
 }
 
@@ -88,24 +99,29 @@
     .holray-unit-single .holray-unit-image-container .holray-unit-image {
         height: 425px;
     }
+
     /* Locations CSS */
     .holray-unit-single .holray-unit-locations {
         flex-direction: row;
         flex-wrap: wrap;
     }
+
     /* Meta CSS */
     .holray-unit-single .holray-unit-features {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
+
     /* Unit check availablity button */
-    .holray-unit-single .holray-unit-btn-mobile {
+    .holray-unit-single .holray-btn-mobile {
         display: none;
     }
-    .holray-unit-single .holray-unit-btn-desktop {
+
+    .holray-unit-single .holray-btn-desktop {
         display: block;
     }
 }
+
 @media (min-width: 1200px) {
     .holray-unit-single .holray-unit-image-container .holray-unit-image {
         height: 400px;
@@ -116,12 +132,13 @@
 .holray-unit-archive {
     padding: 2rem 0;
 }
+
 .holray-unit-archive .holray-title {
     margin-bottom: 1.5rem;
 }
 
 /* Buttons */
-.holray-unit-btn {
+.holray-btn {
     display: inline-flex;
     text-align: center;
     padding: .65rem 1rem;
@@ -132,10 +149,12 @@
     border: none;
     cursor: pointer;
 }
-.holray-unit-btn:hover {
+
+.holray-btn:hover {
     text-decoration: none;
 }
-.holray-unit-btn.holray-unit-btn-primary {
+
+.holray-btn.holray-btn-primary {
     background-color: #000;
     color: #fff;
 }
@@ -146,6 +165,7 @@
     margin: 0rem 0 .5rem 0;
     line-height: 1.4;
 }
+
 @media (min-width: 768px) {
     .holray-title {
         font-size: 2.5rem;
@@ -159,21 +179,25 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
 }
+
 @media (min-width: 768px) {
     .holray-archive-layout {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media (min-width: 1200px) {
     .holray-archive-layout {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 @media (min-width: 1440px) {
     .holray-archive-layout {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
 /* Holray Cards (used for displaying units in a list) */
 .holray-card {
     display: block;
@@ -184,11 +208,14 @@
     text-decoration: none;
     transition: 250ms ease box-shadow;
 }
-.holray-card:hover, .holray-card:active {
+
+.holray-card:hover,
+.holray-card:active {
     text-decoration: none;
     color: #000;
     box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, .1);
 }
+
 .holray-card .holray-card-image-placeholder,
 .holray-card .holray-card-image {
     display: block;
@@ -201,34 +228,283 @@
     aspect-ratio: 2 / 1;
     margin: 0;
 }
+
 .holray-card .holray-card-inner {
     padding: 1rem;
 }
+
 .holray-card h3 {
     margin: 0 0 .15rem 0;
     font-size: 1.5rem;
     font-weight: bold;
 }
+
 .holray-card .holray-card-class {
     font-size: .875rem;
     color: #7a7a7a;
     margin-bottom: .5rem;
     font-weight: 500;
 }
+
 .holray-card .holray-card-excerpt {
     font-size: 1rem;
 }
 
 @media (min-width: 1200px) {
+
     .holray-card .holray-card-image-placeholder,
     .holray-card .holray-card-image {
         aspect-ratio: 5 / 3;
     }
+
     .holray-card h3 {
         margin: 0 0 .2rem 0;
         font-size: 1.75rem;
     }
+
     .holray-card .holray-card-inner {
         padding: 1.25rem;
+    }
+}
+
+/* Holray card on results page */
+.holray-card.holray-result-card .holray-card-icon-info {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.holray-card.holray-result-card .holray-card-icon-info svg {
+    color: #afafaf;
+}
+
+.holray-card.holray-result-card .holray-card-icon-info span {
+    font-size: 14px;
+}
+
+.holray-card.holray-result-card .holray-card-price-column {
+    padding: 1rem;
+    border-top: 1px solid #ebebeb;
+}
+
+.holray-card.holray-result-card .holray-price-wrapper {
+    text-align: center;
+}
+
+.holray-card.holray-result-card .holray-price-label {
+    font-size: .875rem;
+}
+
+.holray-card.holray-result-card .holray-price {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.holray-card.holray-result-card .holray-booknow {
+    display: flex;
+    justify-content: center;
+    margin-top: .5rem
+}
+
+.holray-card.holray-result-card .holray-booknow .holray-btn {
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .holray-card.holray-result-card {
+        display: grid;
+        grid-template-columns: 250px 1fr 150px;
+    }
+
+    .holray-card.holray-result-card .holray-card-image-placeholder,
+    .holray-card.holray-result-card .holray-card-image {
+        aspect-ratio: unset;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: .5rem;
+    }
+
+    .holray-card.holray-result-card .holray-card-inner {
+        padding-right: .5rem;
+    }
+
+    .holray-card.holray-result-card .holray-card-icon-info {
+        display: flex;
+        gap: 7px;
+        margin-top: 15px;
+        margin-bottom: 0px;
+        font-size: 1rem;
+    }
+
+    .holray-card.holray-result-card .holray-card-icon-info svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .holray-card.holray-result-card .holray-card-price-column {
+        padding-left: .5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1200px) {
+    .holray-card.holray-result-card {
+        grid-template-columns: 350px 1fr 200px;
+        min-height: 275px;
+    }
+
+    .holray-card.holray-result-card .holray-price {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 1440px) {
+    .holray-card.holray-result-card {
+        grid-template-columns: 350px 1fr 300px;
+        gap: 10px;
+    }
+
+    .holray-card.holray-result-card .holray-card-icon-info {
+        margin-top: 25px;
+        align-items: center;
+    }
+
+    .holray-card.holray-result-card .holray-card-icon-info svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .holray-card.holray-result-card .holray-card-icon-info span {
+        font-size: 16px;
+    }
+
+    .holray-card.holray-result-card .holray-price {
+        font-size: 1.75rem;
+    }
+}
+
+/* Search Form */
+.holray-searchform label {
+    font-size: 14px;
+}
+
+.holray-formcontrol {
+    display: block;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 2px;
+    border: 1px solid #afafaf;
+    font-family: inherit;
+    padding: 7px 7px;
+    border-radius: 5px;
+    transition: 250ms ease;
+}
+
+.holray-formcontrol:focus,
+.holray-formcontrol:active {
+    border-color: #000;
+    box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, .1);
+    outline: none;
+}
+
+/* Multi Select */
+.holray-multiselect {
+    position: relative;
+}
+.holray-multiselect .holray-formcontrol.is-open {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, .1);
+    border-color: #000;
+}
+.holray-multiselect .holray-multiselect-dropdown {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 10px;
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+.holray-multiselect .holray-multiselect-dropdown .holray-multiselect-item {
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.holray-multiselect .holray-multiselect-dropdown .holray-multiselect-item:last-of-type {
+    margin-bottom: 0px;
+}
+
+
+/* Search Form Sidebar */
+.holray-searchform.holray-placement-sidebar .holray-fromgroup {
+    margin-bottom: 15px;
+}
+
+.holray-searchform.holray-placement-sidebar .holray-fromgroup:last-of-type {
+    margin-bottom: 0px;
+}
+
+.holray-searchform.holray-placement-sidebar .holray-btnformgroup {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.holray-searchform.holray-placement-sidebar .holray-btnformgroup .holray-btn {
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .holray-searchform.holray-placement-sidebar .holray-btnformgroup .holray-btn {
+        width: 256px;
+    }
+}
+
+/* Search Form Top Bar */
+.holray-searchform.holray-placement-topbar form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+}
+
+.holray-searchform.holray-placement-topbar .holray-formcontrol {
+    height: 39px;
+}
+
+.holray-searchform.holray-placement-topbar .holray-searchform-inner {
+    display: none;
+}
+
+.holray-searchform.holray-placement-topbar .holray-searchform-mobile .holray-btn {
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .holray-searchform.holray-placement-topbar form {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: end;
+    }
+
+    .holray-searchform.holray-placement-topbar .holray-searchform-inner {
+        display: block;
+    }
+
+    .holray-searchform.holray-placement-topbar .holray-searchform-mobile {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    .holray-searchform.holray-placement-topbar form {
+        grid-template-columns: repeat(7, 1fr);
     }
 }
