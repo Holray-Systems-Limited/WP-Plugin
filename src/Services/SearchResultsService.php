@@ -54,10 +54,34 @@ class SearchResultsService
         // Units key paired to their holray ids and WP Post object
         $wpUnits = self::getWpUnits($external_ids);
 
+        // Filter and only include units that we have a WP Post for
+        $units = array_filter($units, function($unit) use($wpUnits) {
+            return isset($wpUnits[$unit->unit->id]);
+        });
+
+        // Build an array for each unit containing the API object, meta object and the WP Post object
+        $builtUnits = array_map(function($unit) use($wpUnits) {
+            $wpUnit = $wpUnits[$unit->unit->id];
+
+            $meta = [
+                "class" => get_post_meta($wpUnit->ID, "holray_class", true),
+                "min_berth" => get_post_meta($wpUnit->ID, 'holray_min_berth', true),
+                "max_berth" => get_post_meta($wpUnit->ID, 'holray_max_berth', true),
+                "max_pets" => get_post_meta($wpUnit->ID, 'holray_max_pets', true),
+            ];
+
+            $meta = apply_filters( "holray_results_card_meta", $meta, $wpUnit, $unit );
+
+            return [
+                "api" => $unit,
+                "meta" => $meta,
+                "wp_unit" => $wpUnit
+            ];
+        }, $units);
+
         return [
             "fields" => $fields,
-            "units" => $units,
-            "wpUnits" => $wpUnits,
+            "units" => $builtUnits,
             "hasError" => false,
             "errors" => []
         ];

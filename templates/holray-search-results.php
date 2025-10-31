@@ -18,11 +18,6 @@ $errors = $search["errors"];
  */
 $units = $search["units"];
 /**
- * An array key paired to their Holray ID of local units
- * @var array<int, \WP_Post>
- */
-$wpUnits = $search["wpUnits"];
-/**
  * All fields and their values
  * @var array<int, string>
  */
@@ -59,32 +54,26 @@ $fields = $search["fields"];
                     <?php else: ?>
                             <?php foreach($units as $result): ?>
                 
-                                <?php // Handle if we don't have any WP data about this unit. ?>
-                                <?php if(!isset($wpUnits[$result->unit->id])): ?>
-                                    <?php continue; ?>
-                                <?php endif; ?>
-                                <?php $wpUnit = $wpUnits[$result->unit->id]; ?>
-                                
                                 <div class="holray-card holray-result-card">
-                                    <?php if(get_post_thumbnail_id($wpUnit->ID)): ?>
+                                    <?php if(get_post_thumbnail_id($result["wp_unit"]->ID)): ?>
                                         <div class="holray-card-image-container">
-                                            <img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id($wpUnit->ID), 'original'); ?>" class="holray-card-image" alt="<?php echo esc_attr(get_post_meta($wpUnit->ID, "holray_class", true) . " - " . get_the_title($wpUnit->ID));?>" />
+                                            <img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id($result["wp_unit"]->ID), 'original'); ?>" class="holray-card-image" alt="<?php echo esc_attr($result["meta"]["class"] . " - " . get_the_title($result["wp_unit"]->ID));?>" />
                                         </div>
                                     <?php else: ?>
                                         <div class="holray-card-image-placeholder"></div>
                                     <?php endif; ?>
                                     <div class="holray-card-inner">
-                                        <div class="holray-card-class"><?php echo esc_html(get_post_meta($wpUnit->ID, "holray_class", true)); ?></div>
-                                        <h3><?php echo esc_html(get_the_title($wpUnit->ID)); ?></h3>
+                                        <div class="holray-card-class"><?php echo esc_html($result["meta"]["class"]); ?></div>
+                                        <h3><?php echo esc_html(get_the_title($result["wp_unit"]->ID)); ?></h3>
                 
                                         <div class="holray-card-icon-info">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                                 <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
                                             </svg>
                                             <span>
-                                                <?php echo __("Min berths", "holray_units"); ?> <?php echo esc_html(get_post_meta($wpUnit->ID, 'holray_min_berth', true)); ?>
+                                                <?php echo __("Min berths", "holray_units"); ?> <?php echo esc_html($result["meta"]["min_berth"]); ?>
                                                 &bull;
-                                                <?php echo __("Max berths", "holray_units"); ?> <?php echo esc_html(get_post_meta($wpUnit->ID, 'holray_max_berth', true)); ?>
+                                                <?php echo __("Max berths", "holray_units"); ?> <?php echo esc_html($result["meta"]["max_berth"]); ?>
                                             </span>
                                         </div>
                 
@@ -95,7 +84,7 @@ $fields = $search["fields"];
                                                 </g>
                                             </svg>
                                             <span>
-                                                <?php echo __("Max Pets", "holray_units"); ?> <?php echo esc_html(get_post_meta($wpUnit->ID, 'holray_max_pets', true)); ?>
+                                                <?php echo __("Max Pets", "holray_units"); ?> <?php echo esc_html($result["meta"]["max_pets"]); ?>
                                             </span>
                                         </div>
                 
@@ -104,7 +93,7 @@ $fields = $search["fields"];
                                                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
                                             </svg>
                                             <span>
-                                                <?php echo date("jS M Y", strtotime($result->fromdt)); ?> - <?php echo date("jS M Y", strtotime($result->todt)); ?>
+                                                <?php echo date("jS M Y", strtotime($result["api"]->fromdt)); ?> - <?php echo date("jS M Y", strtotime($result["api"]->todt)); ?>
                                             </span>
                                         </div>
                                     </div>
@@ -115,7 +104,7 @@ $fields = $search["fields"];
                                                 <?php 
                                                     echo \Holray\Plugin\Plugin::getOption("currency_position") == "left" ? esc_html(\Holray\Plugin\Plugin::getOption("currency_symbol")) : "";
                                                     echo number_format(
-                                                        $result->price->totaltopay,
+                                                        $result["api"]->price->totaltopay,
                                                         \Holray\Plugin\Plugin::getOption("decimals"),
                                                         \Holray\Plugin\Plugin::getOption("decimal_sep"),
                                                         \Holray\Plugin\Plugin::getOption("thousand_sep")
@@ -126,7 +115,7 @@ $fields = $search["fields"];
                                         </div>
                 
                                         <div class="holray-booknow">
-                                            <a href="<?php echo esc_url(\Holray\Plugin\Util\Unit::bookNowLinkFromResult($result)); ?>" class="holray-btn holray-btn-primary"><?php echo __("Book Now", "holray_units"); ?></a>
+                                            <a href="<?php echo esc_url(\Holray\Plugin\Util\Unit::bookNowLinkFromResult($result["api"])); ?>" class="holray-btn holray-btn-primary"><?php echo __("Book Now", "holray_units"); ?></a>
                                         </div>
                                     </div>
                                 </div>
