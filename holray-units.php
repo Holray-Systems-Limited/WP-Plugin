@@ -15,7 +15,7 @@
 use Holray\Plugin\Plugin;
 
 if (!defined('ABSPATH')) { exit; }
-define('HOLRAY_UNITS_VERSION', '1.0');
+define('HOLRAY_UNITS_VERSION', '1.1.S');
 define('HOLRAY_UNITS_PATH', plugin_dir_path(__FILE__));
 define('HOLRAY_UNITS_URL', plugin_dir_url(__FILE__));
 

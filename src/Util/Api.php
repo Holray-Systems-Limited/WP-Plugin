@@ -50,11 +50,16 @@ class Api
 
     /**
      * Handle a WordPress query response
+     * Removed union type for $response to fix PHP 8.2 deprecation warning and PHP 7 incompatibility
      */
-    private function handle_response(array|\WP_Error $response)
+    private function handle_response($response)
     {
         if(is_wp_error($response)) {
             return $response;
+        }
+        if (!is_array($response)) {
+            // Handle unexpected type or throw an exception
+            return new \WP_Error('invalid_response', 'Expected an array or WP_Error.');
         }
 
         $responseCode = wp_remote_retrieve_response_code($response);

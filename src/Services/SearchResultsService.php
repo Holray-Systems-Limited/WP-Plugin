@@ -31,18 +31,24 @@ class SearchResultsService
 
         $search_hash = self::getSearchHash($fields);
         // Actually search using our fields
-        $units = Cache::remember("holray_search_" . $search_hash, 5, function() use($fields) {
-            return Plugin::getInstance()->getApi()->post("availability", [
-                "Web" => 1,
-                "allunits" => 1,
-                "features" => $fields["features"],
-                "fromdt" => $fields["fromdt"],
-                "nights" => $fields["nights"],
-                "flexibility" => $fields["flex"],
-                "location" => $fields["location"],
-                "minparty" => $fields["partysize"],
-                "maxparty" => $fields["partysize"],
-            ]);
+        // Build a list of params to pass based on our fields
+        // Allow for empty values to be passed to the API
+        $params = [ "Web" => 1,
+                    "allunits" => 1,
+                    "features" => $fields["features"],
+                    "fromdt" => $fields["fromdt"],
+                    "nights" => $fields["nights"],
+                    "flexibility" => $fields["flex"],
+                    "minparty" => $fields["partysize"],
+                    "maxparty" => $fields["partysize"] + 4,
+                    ];
+
+                    if (!empty($fields["location"])) {
+                        $params["location"] = $fields["location"];
+                    }
+
+        $units = Cache::remember("holray_search_" . $search_hash, 5, function() use($params) {
+            return Plugin::getInstance()->getApi()->post("availability", $params);
         });
 
         // Filter and only include available units
@@ -95,11 +101,11 @@ class SearchResultsService
     {
         $data = [
             "location" => 0,
-            "partysize" => "",
+            "partysize" => "4",
             "features" => [],
-            "fromdt" => "",
-            "nights" => "",
-            "flex" => null,
+            "fromdt" => (new \DateTime('tomorrow'))->format('Y-m-d'),
+            "nights" => "7",
+            "flex" => 3,
         ];
 
         // Location 
@@ -157,9 +163,10 @@ class SearchResultsService
 
         $values = self::get_search_values();
 
-        if($values["location"] === 0) {
-            return new \WP_Error("holray_results_error", "Invalid location selected.");
-        }
+        // Location may be 0 for any location
+        // if($values["location"] === 0) {
+        //     return new \WP_Error("holray_results_error", "Invalid location selected.");
+        // }
 
         if($values["partysize"] == "" || $values["partysize"] == 0) {
             return new \WP_Error("holray_results_error", "Invalid partysize selected.");
