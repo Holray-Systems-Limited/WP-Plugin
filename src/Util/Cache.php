@@ -22,7 +22,7 @@ class Cache
     ) {
 
         // Caching if we can
-        if(Plugin::getOption("api_caching")) {
+        if(Plugin::getOption("api_caching", true)) {
             return self::rememberIgnore($key, $duration, $fn);
         }
         // We're never caching and always hitting the API

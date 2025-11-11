@@ -102,14 +102,14 @@ $fields = $search["fields"];
                                             <div class="holray-price-label"><?php echo __("Book now for", "holray_units"); ?></div>
                                             <div class="holray-price">
                                                 <?php 
-                                                    echo \Holray\Plugin\Plugin::getOption("currency_position") == "left" ? esc_html(\Holray\Plugin\Plugin::getOption("currency_symbol")) : "";
+                                                    echo \Holray\Plugin\Plugin::getOption("currency_position", "left") == "left" ? esc_html(\Holray\Plugin\Plugin::getOption("currency_symbol", "£")) : "";
                                                     echo number_format(
                                                         $result["api"]->price->totaltopay,
-                                                        \Holray\Plugin\Plugin::getOption("decimals"),
-                                                        \Holray\Plugin\Plugin::getOption("decimal_sep"),
-                                                        \Holray\Plugin\Plugin::getOption("thousand_sep")
+                                                        intval(\Holray\Plugin\Plugin::getOption("decimals", "0")),
+                                                        \Holray\Plugin\Plugin::getOption("decimal_sep", "."),
+                                                        \Holray\Plugin\Plugin::getOption("thousand_sep", ",")
                                                     );
-                                                    echo \Holray\Plugin\Plugin::getOption("currency_position") == "right" ? esc_html(\Holray\Plugin\Plugin::getOption("currency_symbol")) : "";
+                                                    echo \Holray\Plugin\Plugin::getOption("currency_position", "left") == "right" ? esc_html(\Holray\Plugin\Plugin::getOption("currency_symbol", "£")) : "";
                                                 ?>
                                             </div>
                                         </div>

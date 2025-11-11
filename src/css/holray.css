@@ -268,6 +268,12 @@
 }
 
 /* Holray card on results page */
+.holray-card.holray-result-card {
+    margin-bottom: 25px;
+}
+.holray-card.holray-result-card:last-of-type {
+    margin-bottom: 0;
+}
 .holray-card.holray-result-card .holray-card-icon-info {
     display: flex;
     gap: 5px;
@@ -386,8 +392,12 @@
 }
 
 /* Search Form */
+.holray-searchform * {
+    box-sizing: border-box;
+}
 .holray-searchform label {
     font-size: 14px;
+    white-space: nowrap;
 }
 
 .holray-formcontrol {
@@ -399,6 +409,7 @@
     font-family: inherit;
     padding: 7px 7px;
     border-radius: 5px;
+    white-space: nowrap;
     transition: 250ms ease;
 }
 
