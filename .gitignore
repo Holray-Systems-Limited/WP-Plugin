@@ -1,3 +1,4 @@
+
 # Ignore WordPress core files (if ever present)
 wp-admin/
 wp-includes/
@@ -10,6 +11,12 @@ Thumbs.db
 # Ignore IDE/editor settings
 .vscode/
 .idea/
+
+# Ignore Composer dependencies
+/vendor/
+
+# Ignore Composer lock file (optional, if you don't want to commit it)
+#composer.lock
 
 # Ignore Node modules (if you use npm for assets)
 node_modules/
@@ -28,4 +35,3 @@ coverage/
 
 # Ignore GitHub Actions cache (optional)
 .cache/
-
