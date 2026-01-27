@@ -125,7 +125,7 @@
                     <table class="form-table" role="presentation">
                         <tr>
                             <th>
-                                <label for="holrau_search_results_page"><?php echo __('Search Results Page', 'holray-units'); ?></label>
+                                <label for="holray_search_results_page"><?php echo __('Search Results Page', 'holray-units'); ?></label>
                             </th>
                             <td>
                                 <?php
@@ -137,6 +137,24 @@
                                         "option_none_value" => "0",
                                     ]);
                                 ?>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th>
+                                <label for="holray_exclude_locations"><?php echo __('Exclude Locations', 'holray-units'); ?></label>
+                                <div style="font-size:12px;margin-top:5px">Click and drag or hold CTRL+Click the locations you would like to exclude.</div>
+                            </th>
+                            <td>
+                                <select multiple id="holray_exclude_locations" name="holray_units_exclude_locations[]" style="height: 200px">
+                                    <?php $locations = get_terms([ "taxonomy" => "holray_unit_location", "hide_empty" => false ]); ?>
+                                    <?php foreach($locations as $location): ?>
+                                        <?php $location_external_id = get_term_meta($location->term_id, 'holray_external_id', true); ?>
+                                        <option value="<?php echo $location_external_id; ?>" <?php echo in_array($location_external_id, $excluded_locations) ? "selected" : ""; ?>><?php echo esc_html($location->name); ?></option>
+                                        <?php unset($location_external_id); ?>
+                                    <?php endforeach; ?>
+                                </select>
                             </td>
                         </tr>
                     </table>

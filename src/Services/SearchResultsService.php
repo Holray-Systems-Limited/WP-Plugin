@@ -209,6 +209,13 @@ class SearchResultsService
         $wpUnits = new \WP_Query([
             "posts_per_page" => -1,
             "post_type" => "holray_unit",
+            "tax_query" => [
+                [
+                    "taxonomy" => "holray_unit_location",
+                    "field" => "id",
+                    "terms" => LocationService::get_allowed_location_ids()
+                ]
+            ],
             "meta_query" => [
                 [
                     "key" => "holray_external_id",

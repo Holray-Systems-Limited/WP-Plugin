@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Holray Units
  * Plugin URI:  https://holray.co.uk/
- * Description: Sync your Holray units with your WordPress website along with quick any easy availability search functions.
+ * Description: Sync your Holray units with your WordPress website along with quick and easy availability search functions.
  * Version: 1.0
  * Author: Holray Systems Limited
  * Author URI:  https://holray.co.uk/

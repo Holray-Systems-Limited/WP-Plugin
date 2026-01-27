@@ -64,6 +64,9 @@ class Settings extends Page
         $dsep = Plugin::getOption('decimal_sep', '.');
         $decs = (int) Plugin::getOption('decimals', 2);
 
+
+        $excluded_locations = Plugin::getOption('excluded_locations', []);
+
         $search_results_page_id = Plugin::getOption('search_results_page','0');
 
         $last_sync = null;

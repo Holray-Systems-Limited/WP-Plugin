@@ -3,6 +3,7 @@
 namespace Holray\Plugin\Shortcodes;
 
 use Holray\Plugin\Plugin;
+use Holray\Plugin\Services\LocationService;
 use Holray\Plugin\Services\SearchResultsService;
 use Holray\Plugin\Util\Cache;
 
@@ -23,8 +24,8 @@ class HolraySearch extends Shortcode
     public function render() {
         ob_start();
         $args = $this->getArgs();
-        $locations = get_terms([ "taxonomy" => "holray_unit_location", "hide_empty" => false ]);
-       
+        $locations = LocationService::get_allowed_locations();
+
         // Cache our features list for 60 mins.
         $features = Cache::remember("features", 24 * 60, function() {
             return Plugin::getInstance()->getApi()->get("features");

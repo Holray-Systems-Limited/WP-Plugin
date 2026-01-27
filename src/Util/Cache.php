@@ -61,4 +61,19 @@ class Cache
         return $cachable;
     }
 
+
+    /**
+     * Forget something in the cache!
+     * 
+     * @param string $key - the key of what is saved.
+     * @return void
+     */
+    public static function forget(
+        string $key
+    )
+    {
+        $full_key = "holray_" . $key;
+        delete_transient($full_key);
+    }
+
 }
