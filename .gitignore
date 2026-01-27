@@ -13,7 +13,7 @@ Thumbs.db
 .idea/
 
 # Ignore Composer dependencies
-/vendor/
+# /vendor/
 
 # Ignore Composer lock file (optional, if you don't want to commit it)
 #composer.lock
