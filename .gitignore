@@ -1,9 +1,0 @@
-
-# Ignore OS-specific files
-.DS_Store
-Thumbs.db
-# Ignore IDE/editor settings
-.vscode/
-.idea/
-# Ignore GitHub Actions cache (optional)
-.cache/
