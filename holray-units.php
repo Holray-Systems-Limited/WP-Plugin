@@ -11,6 +11,7 @@
  * Requires PHP: 7.4
  * Text Domain: holray-units
  * Domain Path: /languages
+ * Update URI:  https://holray-systems-limited.github.io/WP-Plugin/update.json
  */
 
 use Holray\Plugin\Plugin;
