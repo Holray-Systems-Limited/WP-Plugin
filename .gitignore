@@ -1,37 +1,9 @@
 
-# Ignore WordPress core files (if ever present)
-wp-admin/
-wp-includes/
-wp-content/uploads/
-
 # Ignore OS-specific files
 .DS_Store
 Thumbs.db
-
 # Ignore IDE/editor settings
 .vscode/
 .idea/
-
-# Ignore Composer dependencies
-# /vendor/
-
-# Ignore Composer lock file (optional, if you don't want to commit it)
-#composer.lock
-
-# Ignore Node modules (if you use npm for assets)
-node_modules/
-
-# Ignore build artifacts
-*.zip
-*.tar.gz
-
-# Ignore logs and temporary files
-*.log
-*.tmp
-
-# Ignore PHPUnit cache and coverage reports
-.phpunit.result.cache
-coverage/
-
 # Ignore GitHub Actions cache (optional)
 .cache/
