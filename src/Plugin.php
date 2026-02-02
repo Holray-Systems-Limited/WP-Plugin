@@ -9,6 +9,7 @@ use Holray\Plugin\Actions\Wp\UpdateUnit;
 use Holray\Plugin\Metabox\UnitFields;
 use Holray\Plugin\Pages\Settings;
 use Holray\Plugin\PostTypes\Unit;
+use Holray\Plugin\Services\UpdateService;
 use Holray\Plugin\Shortcodes\HolraySearch;
 use Holray\Plugin\Util\Api;
 use Holray\Plugin\Util\Templates;
@@ -28,6 +29,13 @@ class Plugin {
      * @var \Holray\Plugin\Util\Api
      */
     private $api;
+
+    /**
+     * The active Updater handler instance for Holray
+     * 
+     * @var \Holray\Plugin\Services\UpdateService
+     */
+    private $updater;
 
     /**
      * New plugin instance
@@ -60,6 +68,9 @@ class Plugin {
 
         // Setup the api instance.
         $this->api = new Api(self::getOption("holray_url"), self::getOption("api_key"));
+
+        // Setup the updater instance
+        $this->updater = new UpdateService;
 
         // Add the filters for loading custom templates
         Templates::init_loader();
