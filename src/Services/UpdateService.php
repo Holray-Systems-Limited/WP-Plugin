@@ -24,8 +24,8 @@ class UpdateService
             return $transient;
         }
 
-        $plugin_slug = 'my-plugin';
-        $plugin_file = plugin_basename(__FILE__);
+        $plugin_slug = 'holray-units';
+        $plugin_file = HOLRAY_UNITS_PLUGIN_PATH;
 
         $request = wp_remote_get(
             "https://api.github.com/repos/Holray-Systems-Limited/WP-Plugin/releases/latest",
@@ -66,15 +66,15 @@ class UpdateService
      * install another version of it.
      */
     function rename_git_folder($source, $remote_source, $upgrader, $hook_extra) {
-        if (empty($hook_extra['plugin'])) {
+        if (empty($hook_extra['holray-units'])) {
             return $source;
         }
 
-        if ($hook_extra['plugin'] !== plugin_basename(__FILE__)) {
+        if ($hook_extra['holray-units'] !== HOLRAY_UNITS_PLUGIN_PATH) {
             return $source;
         }
 
-        $corrected_source = trailingslashit($remote_source) . 'holray';
+        $corrected_source = trailingslashit($remote_source) . 'holray-units';
 
         if (!rename($source, $corrected_source)) {
             return new \WP_Error('rename_failed', 'Could not rename Holray Plugin GitHub folder.');
