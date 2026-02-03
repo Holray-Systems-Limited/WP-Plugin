@@ -34,7 +34,12 @@ class HolraySearch extends Shortcode
             $features = [];
         }
         
-        $values = SearchResultsService::get_search_values();
+        $values = SearchResultsService::get_search_values(
+            $args["partysize"],
+            $args["nights"],
+            $args["fromDate"],
+            $args["flex"],
+        );
 
         include_once HOLRAY_UNITS_PATH . "src/views/shortcodes/search.php";
         $contents = ob_get_clean();
@@ -50,6 +55,10 @@ class HolraySearch extends Shortcode
         $defaults = [
             "placement" => "topbar",
             "results_page" => get_permalink(Plugin::getOption("search_results_page", "0")),
+            "partysize" => "4",
+            "nights" => "7",
+            "fromDate" => "tomorrow",
+            "flex" => "3",
         ];
 
         return array_merge($defaults, $args);

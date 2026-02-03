@@ -15,7 +15,7 @@ class SearchResultsService
     {
         // Validate our request
         $fields = self::validate();
-        if(is_wp_error($fields)) {
+        if (is_wp_error($fields)) {
             return [
                 "fields" => [],
                 "units" => [],
@@ -33,21 +33,22 @@ class SearchResultsService
         // Actually search using our fields
         // Build a list of params to pass based on our fields
         // Allow for empty values to be passed to the API
-        $params = [ "Web" => 1,
-                    "allunits" => 1,
-                    "features" => $fields["features"],
-                    "fromdt" => $fields["fromdt"],
-                    "nights" => $fields["nights"],
-                    "flexibility" => $fields["flex"],
-                    "minparty" => $fields["partysize"],
-                    "maxparty" => $fields["partysize"] + 4,
-                    ];
+        $params = [
+            "Web" => 1,
+            "allunits" => 1,
+            "features" => $fields["features"],
+            "fromdt" => $fields["fromdt"],
+            "nights" => $fields["nights"],
+            "flexibility" => $fields["flex"],
+            "minparty" => $fields["partysize"],
+            "maxparty" => $fields["partysize"] + 4,
+        ];
 
-                    if (!empty($fields["location"])) {
-                        $params["location"] = $fields["location"];
-                    }
+        if (!empty($fields["location"])) {
+            $params["location"] = $fields["location"];
+        }
 
-        $units = Cache::remember("holray_search_" . $search_hash, 5, function() use($params) {
+        $units = Cache::remember("holray_search_" . $search_hash, 5, function () use ($params) {
             return Plugin::getInstance()->getApi()->post("availability", $params);
         });
 
@@ -56,17 +57,17 @@ class SearchResultsService
             return $unit->available && $unit->avonline;
         });
 
-        $external_ids = array_map(fn ($unit) => intval($unit->unit->id), $units);
+        $external_ids = array_map(fn($unit) => intval($unit->unit->id), $units);
         // Units key paired to their holray ids and WP Post object
         $wpUnits = self::getWpUnits($external_ids);
 
         // Filter and only include units that we have a WP Post for
-        $units = array_filter($units, function($unit) use($wpUnits) {
+        $units = array_filter($units, function ($unit) use ($wpUnits) {
             return isset($wpUnits[$unit->unit->id]);
         });
 
         // Build an array for each unit containing the API object, meta object and the WP Post object
-        $builtUnits = array_map(function($unit) use($wpUnits) {
+        $builtUnits = array_map(function ($unit) use ($wpUnits) {
             $wpUnit = $wpUnits[$unit->unit->id];
 
             $meta = [
@@ -76,7 +77,7 @@ class SearchResultsService
                 "max_pets" => get_post_meta($wpUnit->ID, 'holray_max_pets', true),
             ];
 
-            $meta = apply_filters( "holray_results_card_meta", $meta, $wpUnit, $unit );
+            $meta = apply_filters("holray_results_card_meta", $meta, $wpUnit, $unit);
 
             return [
                 "api" => $unit,
@@ -91,68 +92,109 @@ class SearchResultsService
             "hasError" => false,
             "errors" => []
         ];
-
     }
 
     /**
      * Get the search fields
      */
-    public static function get_search_values()
-    {
+    public static function get_search_values(
+        $partysize = "4",
+        $nights = "7",
+        $fromDate = "tomorrow",
+        $flex = 3
+    ) {
+
+        $validatedDefaults = self::validateDefaults($partysize, $nights, $fromDate, $flex);
+
         $data = [
             "location" => 0,
-            "partysize" => "4",
+            "partysize" => $validatedDefaults["partysize"],
             "features" => [],
-            "fromdt" => (new \DateTime('tomorrow'))->format('Y-m-d'),
-            "nights" => "7",
-            "flex" => 3,
+            "fromdt" => ($validatedDefaults["fromDate"])->format('Y-m-d'),
+            "nights" => $validatedDefaults["nights"],
+            "flex" => $validatedDefaults["flex"],
         ];
 
         // Location 
-        if(isset($_GET["location"]) && intval($_GET["location"]) > 0) {
+        if (isset($_GET["location"]) && intval($_GET["location"]) > 0) {
             $data["location"] = intval($_GET["location"]);
         }
 
         // Party size 
-        if(isset($_GET["partysize"]) && intval($_GET["partysize"]) > 0) {
+        if (isset($_GET["partysize"]) && intval($_GET["partysize"]) > 0) {
             $data["partysize"] = intval($_GET["partysize"]);
         }
 
         // Features 
-        if(isset($_GET["features"])) {
-            if(!is_array($_GET["features"])) {
-                if(intval($_GET["features"]) !== 0) {
-                    $data["features"] = [ intval($_GET["features"]) ];
+        if (isset($_GET["features"])) {
+            if (!is_array($_GET["features"])) {
+                if (intval($_GET["features"]) !== 0) {
+                    $data["features"] = [intval($_GET["features"])];
                 }
             } else {
-                $data["features"] = array_map(fn ($feature) => intval($feature), $_GET["features"]);
+                $data["features"] = array_map(fn($feature) => intval($feature), $_GET["features"]);
             }
         }
-        
+
         // From date 
-        if(isset($_GET["fromdt"])) {
+        if (isset($_GET["fromdt"])) {
             $fromDate = \DateTime::createFromFormat("Y-m-d", $_GET["fromdt"]);
             $today = (new \DateTime)->setTime(0, 0, 0, 0);
-            if($fromDate != false) {
+            if ($fromDate != false) {
                 $fromDate->setTime(0, 0, 0, 0);
-                if($fromDate->getTimestamp() >= $today->getTimestamp()) {
+                if ($fromDate->getTimestamp() >= $today->getTimestamp()) {
                     $data["fromdt"] = $fromDate->format("Y-m-d");
                 }
             }
         }
 
         // Nights 
-        if(isset($_GET["nights"]) && intval($_GET["nights"]) > 0) {
+        if (isset($_GET["nights"]) && intval($_GET["nights"]) > 0) {
             $data["nights"] = intval($_GET["nights"]);
         }
 
         // Flexible dates
-        if(isset($_GET["flex"])) {
+        if (isset($_GET["flex"])) {
             $data["flex"] = intval($_GET["flex"]);
         }
 
         return $data;
+    }
 
+    /**
+     * Validate the default search values and return either the validated versions or
+     * our defaults
+     */
+    private static function validateDefaults(
+        $partysize = "4",
+        $nights = "7",
+        $fromDate = "tomorrow",
+        $flex = 3
+    ) {
+        try {
+            $fromDt = new \DateTime($fromDate);
+        } catch (\DateMalformedStringException $e) {
+            $fromDt = new \DateTime("tomorrow");
+        }
+
+        if(intval($partysize) < 1) {
+            $partysize = "4";
+        }
+        
+        if(intval($nights) < 1) {
+            $nights = "7";
+        }
+
+        if(!in_array(intval($flex), [ 3, 5, 7 ])) {
+            $flex = 3;
+        }
+
+        return [
+            "fromDate" => $fromDt,
+            "partysize" => $partysize,
+            "nights" => $nights,
+            "flex" => $flex
+        ];
     }
 
     /**
@@ -168,15 +210,15 @@ class SearchResultsService
         //     return new \WP_Error("holray_results_error", "Invalid location selected.");
         // }
 
-        if($values["partysize"] == "" || $values["partysize"] == 0) {
+        if ($values["partysize"] == "" || $values["partysize"] == 0) {
             return new \WP_Error("holray_results_error", "Invalid partysize selected.");
         }
 
-        if($values["fromdt"] == "") {
+        if ($values["fromdt"] == "") {
             return new \WP_Error("holray_results_error", "Please enter a start date.");
         }
 
-        if($values["nights"] == "" || $values["nights"] == 0) {
+        if ($values["nights"] == "" || $values["nights"] == 0) {
             return new \WP_Error("holray_results_error", "The number of nights is invalid.");
         }
 
@@ -186,10 +228,11 @@ class SearchResultsService
     /**
      * Get the unique search hash based on the fields entered
      */
-    private static function getSearchHash(array $fields) {
+    private static function getSearchHash(array $fields)
+    {
         $string = "";
-        foreach($fields as $key => $val) {
-            if(is_array($val)) {
+        foreach ($fields as $key => $val) {
+            if (is_array($val)) {
                 $string .= $key . "=" . implode(",", $val) . "&";
             } else {
                 $string .= $key . "=" . $val . "&";
@@ -226,14 +269,12 @@ class SearchResultsService
         ]);
 
         $data = [];
-        foreach($wpUnits->posts as $unit) {
+        foreach ($wpUnits->posts as $unit) {
             $holray_id = get_post_meta($unit->ID, "holray_external_id", true);
 
             $data[$holray_id] = $unit;
         }
 
         return $data;
-
     }
-
 }
