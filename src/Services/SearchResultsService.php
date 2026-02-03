@@ -185,7 +185,7 @@ class SearchResultsService
             $nights = "7";
         }
 
-        if(!in_array(intval($flex), [ 3, 5, 7 ])) {
+        if(!in_array(intval($flex), [ 0, 3, 5, 7 ])) {
             $flex = 3;
         }
 
@@ -193,7 +193,7 @@ class SearchResultsService
             "fromDate" => $fromDt,
             "partysize" => $partysize,
             "nights" => $nights,
-            "flex" => $flex
+            "flex" => intval($flex) === 0 ? null : $flex
         ];
     }
 
