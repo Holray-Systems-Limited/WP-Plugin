@@ -4,7 +4,7 @@
             <div class="holray-fromgroup">
                 <label for="holray_location"><?php echo __("Location", "holray_units"); ?></label>
                 <select name="location" id="holray_location" class="holray-formcontrol" aria-label="Location" required>
-                    <option selected value=0><?php echo __("Any", "holray_units"); ?></option>
+                    <option selected value='0'><?php echo __("Any", "holray_units"); ?></option>
                     <?php foreach($locations as $location): ?>
                         <?php $location_external_id = get_term_meta($location->term_id, 'holray_external_id', true); ?>
                         <option value="<?php echo $location_external_id; ?>" <?php echo $values["location"] == $location_external_id ? "selected" : ""; ?>><?php echo esc_html($location->name); ?></option>
