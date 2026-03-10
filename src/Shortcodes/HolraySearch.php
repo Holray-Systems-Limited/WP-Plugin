@@ -26,7 +26,6 @@ class HolraySearch extends Shortcode
         $args = $this->getArgs();
         $locations = LocationService::get_allowed_locations();
 
-        // Cache our features list for 60 mins.
         $features = Cache::remember("features", 24 * 60, function() {
             return Plugin::getInstance()->getApi()->get("features");
         });

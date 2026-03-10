@@ -1,6 +1,7 @@
 <?php
 namespace Holray\Plugin;
 
+use Holray\Plugin\Actions\Ajax\UnitCalendar;
 use Holray\Plugin\Actions\SaveApiSettings;
 use Holray\Plugin\Actions\SavePricingSettings;
 use Holray\Plugin\Actions\SaveSearchResultsSettings;
@@ -10,6 +11,7 @@ use Holray\Plugin\Metabox\UnitFields;
 use Holray\Plugin\Pages\Settings;
 use Holray\Plugin\PostTypes\Unit;
 use Holray\Plugin\Services\UpdateService;
+use Holray\Plugin\Shortcodes\HolrayCalendar;
 use Holray\Plugin\Shortcodes\HolraySearch;
 use Holray\Plugin\Util\Api;
 use Holray\Plugin\Util\Templates;
@@ -121,6 +123,8 @@ class Plugin {
         $this->actions["save_search_results_settings"] = new SaveSearchResultsSettings;
 
         $this->actions["sync_with_holray"] = new Sync;
+
+        $this->actions["ajax_unit_calendar"] = new UnitCalendar;
     }
 
     /**
@@ -137,6 +141,7 @@ class Plugin {
     private function init_shortcodes()
     {
         new HolraySearch;
+        new HolrayCalendar;
     }
 
     /**
@@ -236,6 +241,7 @@ class Plugin {
     public function init_frontend_js()
     {
         wp_enqueue_script( 'holray_js', HOLRAY_UNITS_URL . '/src/js/holray.js', false, HOLRAY_UNITS_VERSION, true );
+        wp_register_script( 'holray_calendars_js', HOLRAY_UNITS_URL . '/src/js/holray-calendars.js', false, HOLRAY_UNITS_VERSION, true );
     }
     
 }
