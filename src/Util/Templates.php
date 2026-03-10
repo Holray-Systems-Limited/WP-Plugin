@@ -26,6 +26,8 @@ class Templates
 
         $tpl = $template;
         if(is_singular('holray_unit')) {
+            // This script is required on this template so we'll inject it here.
+            wp_enqueue_script( 'holray_calendars_js' );
             $tpl = self::locate_template("single-holray_unit.php");
         }
 

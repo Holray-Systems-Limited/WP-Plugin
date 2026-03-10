@@ -94,6 +94,13 @@
     display: none;
 }
 
+.holray-unit-single .holray-unit-content-row {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+    margin-top: 20px;
+}
+
 /* Responsive Unit Page */
 @media (min-width: 768px) {
     .holray-unit-single .holray-unit-image-container .holray-unit-image {
@@ -126,6 +133,16 @@
     .holray-unit-single .holray-unit-image-container .holray-unit-image {
         height: 400px;
     }
+    .holray-unit-single .holray-unit-content-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+        margin-top: 20px;
+    }
+    .holray-unit-single .holray-unit-content-row .holray-calendar {
+        position: sticky;
+        top: 50px;
+    }
 }
 
 /* The Archive Page */
@@ -138,6 +155,7 @@
 }
 
 /* Buttons */
+.holray-calendar .holidaydetails .activeBtn,
 .holray-btn {
     display: inline-flex;
     text-align: center;
@@ -156,6 +174,11 @@
 
 .holray-btn.holray-btn-primary {
     background-color: #000;
+    color: #fff;
+}
+
+.holray-calendar .holidaydetails .activeBtn {
+    background-color: rgb(31, 146, 14);
     color: #fff;
 }
 
@@ -517,5 +540,171 @@
 @media (min-width: 1200px) {
     .holray-searchform.holray-placement-topbar form {
         grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+
+
+/*
+*
+*   CALENDARS CSS
+*
+*/
+.holray-calendar {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    min-height: 314px;
+}
+.holray-calendar .holray-loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .75);
+}
+.holray-calendar .holray-loader > div {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #427493;
+    border-left: 4px solid transparent;
+    border-radius: 50%;
+    animation: holray-loader-spin 500ms linear infinite;
+}
+.holray-calendar .cal .header {
+    display: flex;
+    justify-content: space-between;
+}
+.holray-calendar .cal .header .calhdrm {
+    font-weight: 500;
+}
+.holray-calendar .cal .header .fas {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    cursor: pointer;
+}
+.holray-calendar .cal .header .fa-arrow-left {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tbGVmdC1pY29uIGx1Y2lkZS1jaGV2cm9uLWxlZnQiPjxwYXRoIGQ9Im0xNSAxOC02LTYgNi02Ii8+PC9zdmc+);
+}
+.holray-calendar .cal .header .fa-arrow-right {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tcmlnaHQtaWNvbiBsdWNpZGUtY2hldnJvbi1yaWdodCI+PHBhdGggZD0ibTkgMTggNi02LTYtNiIvPjwvc3ZnPg==);
+}
+.holray-calendar .calbody {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+.holray-calendar .calbody span {
+    display: block;
+}
+.holray-calendar .calbody .dayhdr {
+    background-color: #1C3859;
+    color: #fff;
+}
+.holray-calendar .calbody .oldday,
+.holray-calendar .calbody .naday,
+.holray-calendar .key .naday,
+.holray-calendar .key .oldday {
+    background-color: #ebebeb;
+}
+.holray-calendar .calbody .avday,
+.holray-calendar .key .avday {
+    background-color: #fff;
+}
+.holray-calendar .calbody .stday,
+.holray-calendar .key .stday {
+    background-color: #427493;
+    color: #fff;
+    cursor: pointer;
+}
+.holray-calendar .calbody .selday,
+.holray-calendar .calbody .hover {
+    background-color: #E96E4F;
+    color: #fff;
+}
+
+.holray-calendar .key {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    gap: 2px;
+    gap: 10px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.holray-calendar .key .selday,
+.holray-calendar .key .stday,
+.holray-calendar .key .avday,
+.holray-calendar .key .naday,
+.holray-calendar .key .oldday {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+.holray-calendar .key .selday {
+    background-color: #E96E4F;
+}
+.holray-calendar .key .avday {
+    border: 1px solid #000;
+}
+.holray-calendar #detail {
+    font-size: 16px;
+    padding-left: 10px;
+    border-left: 1px solid #427493;
+}
+.holray-calendar #detail span {
+    display: flex;
+    gap: 10px;
+    white-space: nowrap;
+}
+.holray-calendar #detail > span,
+.holray-calendar .holidaydetails > span {
+    margin-bottom: 5px;
+}
+.holray-calendar #detail .heading {
+    position: relative;
+    text-transform: capitalize;
+    flex-shrink: 0;
+}
+.holray-calendar #detail .heading br {
+    display: none;
+}
+.holray-calendar #detail .heading i {
+    font-size: 12px;
+    position: absolute;
+    top: 20px;
+}
+.holray-calendar #detail .entry {
+    flex-grow: 1;
+}
+.holray-calendar #detail select {
+    display: block;
+    border: 1px solid #afafaf;
+    padding: 5px;
+    border-radius: 8px;
+    font-family: inherit;
+    width: 100%;
+    transition: 250ms ease box-shadow;
+}
+.holray-calendar #detail select:focus {
+    border-color: #1C3859;
+    box-shadow: 0px 0px 0px 2px rgb(28 56 89 / 30%);
+    outline: none;
+}
+
+@keyframes holray-loader-spin {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
     }
 }
