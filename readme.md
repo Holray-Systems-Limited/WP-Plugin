@@ -112,7 +112,7 @@ Displays the search form anywhere on your site.
 | Argument       | Default  | Description                                                               |
 | -------------- | -------- | ------------------------------------------------------------------------- |
 | `placement`    | topbar   | Layout style of the form (topbar or sidebar)                              |
-| `results_page` | Page ID  | Page to display search results (default: settings page)                   |
+| `results_page` | Page ID  | Page to display search results (default: the page set in settings)        |
 | `partysize`    | 4        | Default number of guests                                                  |
 | `nights`       | 7        | Default number of nights                                                  |
 | `fromDate`     | tomorrow | Start date for search (format: `Y-m-d` or string e.g., `2 days from now`) |
@@ -130,11 +130,11 @@ Displays a fully customisable Holray calendar for a specific unit.
 
 **Required Argument:**
 
-*   `holray_calendar` – The unit class name from Holray (must match exactly)
+*   `unit` – The unit class name from Holray (must match exactly)
     
 
 **Example:**  
-`[holray_calendar holray_calendar="LuxuryCottage2026"]`
+`[holray_calendar unit="Unit Class"]`
 
 * * *
 
