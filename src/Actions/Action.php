@@ -35,6 +35,20 @@ class Action
      */
     public $is_native = false;
 
+    /**
+     * Is an ajax wordpress action?
+     * 
+     * @var boolean
+     */
+    public $is_ajax = false;
+
+    /**
+     * Available for public ajax
+     * 
+     * @var boolean
+     */
+    public $is_public_ajax = false;
+
 
     /**
      * On new action created
@@ -43,7 +57,14 @@ class Action
      */
     public function __construct()
     {
-        if($this->is_native) {
+        if($this->is_ajax) {
+            add_action("wp_ajax_" . $this->action, [ $this, "handle" ]);
+            if($this->is_public_ajax) {
+                add_action("wp_ajax_nopriv_" . $this->action, [ $this, "handle" ]);
+            } else {
+                add_action("wp_ajax_nopriv_" . $this->action, "__return false");
+            }
+        } else if($this->is_native) {
             add_action($this->action, [$this, 'handle']);
         } else {
             add_action( 'admin_post_holrayunits_' . $this->action, [$this, '_handle'] );

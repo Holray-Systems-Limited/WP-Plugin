@@ -80,6 +80,23 @@ get_header();
                 </div>
             <?php endif; ?>
         </div>
+
+        <div class="holray-unit-content-row">
+            <div class="holray-unit-content">
+                <?php the_content(); ?>
+            </div>
+            <div class="holray-unit-calendar">
+                <div 
+                    id="holray-unit-calendar" 
+                    class="holray-calendar" 
+                    data-holray-url="<?php echo esc_url(\Holray\Plugin\Util\Url::getCustBookUrl()); ?>" 
+                    data-holray-cal-url="<?php echo esc_url(admin_url("admin-ajax.php")); ?>" 
+                    data-holray-unit="<?php echo esc_attr(get_post_meta(get_the_ID(), "holray_class", true)); ?>"
+                >
+                    <div class="holray-loader"><div></div></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
