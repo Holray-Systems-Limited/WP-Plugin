@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInita634f9298b88843ef5c6e627ba3d5c4d
 {
     public static $prefixLengthsPsr4 = array (
-        'H' => 
+        'H' =>
         array (
             'Holray\\Plugin\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Holray\\Plugin\\' => 
+        'Holray\\Plugin\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -22,6 +22,34 @@ class ComposerStaticInita634f9298b88843ef5c6e627ba3d5c4d
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Holray\\Plugin\\Actions\\Action' => __DIR__ . '/../..' . '/src/Actions/Action.php',
+        'Holray\\Plugin\\Actions\\Ajax\\UnitCalendar' => __DIR__ . '/../..' . '/src/Actions/Ajax/UnitCalendar.php',
+        'Holray\\Plugin\\Actions\\SaveApiSettings' => __DIR__ . '/../..' . '/src/Actions/SaveApiSettings.php',
+        'Holray\\Plugin\\Actions\\SavePricingSettings' => __DIR__ . '/../..' . '/src/Actions/SavePricingSettings.php',
+        'Holray\\Plugin\\Actions\\SaveSearchResultsSettings' => __DIR__ . '/../..' . '/src/Actions/SaveSearchResultsSettings.php',
+        'Holray\\Plugin\\Actions\\Sync' => __DIR__ . '/../..' . '/src/Actions/Sync.php',
+        'Holray\\Plugin\\Actions\\Wp\\UpdateUnit' => __DIR__ . '/../..' . '/src/Actions/Wp/UpdateUnit.php',
+        'Holray\\Plugin\\Exceptions\\HolrayException' => __DIR__ . '/../..' . '/src/Exceptions/HolrayException.php',
+        'Holray\\Plugin\\Exceptions\\HolrayImportException' => __DIR__ . '/../..' . '/src/Exceptions/HolrayImportException.php',
+        'Holray\\Plugin\\Metabox\\Metabox' => __DIR__ . '/../..' . '/src/Metabox/Metabox.php',
+        'Holray\\Plugin\\Metabox\\UnitFields' => __DIR__ . '/../..' . '/src/Metabox/UnitFields.php',
+        'Holray\\Plugin\\Pages\\Page' => __DIR__ . '/../..' . '/src/Pages/Page.php',
+        'Holray\\Plugin\\Pages\\Settings' => __DIR__ . '/../..' . '/src/Pages/Settings.php',
+        'Holray\\Plugin\\Plugin' => __DIR__ . '/../..' . '/src/Plugin.php',
+        'Holray\\Plugin\\PostTypes\\Unit' => __DIR__ . '/../..' . '/src/PostTypes/Unit.php',
+        'Holray\\Plugin\\Services\\LocationService' => __DIR__ . '/../..' . '/src/Services/LocationService.php',
+        'Holray\\Plugin\\Services\\SearchResultsService' => __DIR__ . '/../..' . '/src/Services/SearchResultsService.php',
+        'Holray\\Plugin\\Services\\UnitService' => __DIR__ . '/../..' . '/src/Services/UnitService.php',
+        'Holray\\Plugin\\Services\\UpdateService' => __DIR__ . '/../..' . '/src/Services/UpdateService.php',
+        'Holray\\Plugin\\Shortcodes\\HolrayCalendar' => __DIR__ . '/../..' . '/src/Shortcodes/HolrayCalendar.php',
+        'Holray\\Plugin\\Shortcodes\\HolraySearch' => __DIR__ . '/../..' . '/src/Shortcodes/HolraySearch.php',
+        'Holray\\Plugin\\Shortcodes\\Shortcode' => __DIR__ . '/../..' . '/src/Shortcodes/Shortcode.php',
+        'Holray\\Plugin\\Util\\Api' => __DIR__ . '/../..' . '/src/Util/Api.php',
+        'Holray\\Plugin\\Util\\Cache' => __DIR__ . '/../..' . '/src/Util/Cache.php',
+        'Holray\\Plugin\\Util\\Request' => __DIR__ . '/../..' . '/src/Util/Request.php',
+        'Holray\\Plugin\\Util\\Templates' => __DIR__ . '/../..' . '/src/Util/Templates.php',
+        'Holray\\Plugin\\Util\\Unit' => __DIR__ . '/../..' . '/src/Util/Unit.php',
+        'Holray\\Plugin\\Util\\Url' => __DIR__ . '/../..' . '/src/Util/Url.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
