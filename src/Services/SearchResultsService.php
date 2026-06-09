@@ -40,8 +40,7 @@ class SearchResultsService
             "fromdt" => $fields["fromdt"],
             "nights" => $fields["nights"],
             "flexibility" => $fields["flex"],
-            "minparty" => $fields["partysize"],
-            "maxparty" => $fields["partysize"] + 4,
+            "party" => $fields["partysize"],
         ];
 
         if (!empty($fields["location"])) {
