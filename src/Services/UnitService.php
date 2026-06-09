@@ -123,4 +123,13 @@ class UnitService {
         do_action( 'holray_units_after_sync', $response->data );
     }
 
+    /**
+     * Get the unit class for a given post id
+     */
+    public static function get_class($id = null)
+    {
+        $idToUse = is_null($id) ? get_the_ID() : $id;
+        return get_post_meta($idToUse, "holray_class", true);
+    }
+
 }
