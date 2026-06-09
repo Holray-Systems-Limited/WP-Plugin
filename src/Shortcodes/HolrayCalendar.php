@@ -22,11 +22,8 @@ class HolrayCalendar extends Shortcode
         wp_enqueue_script( 'holray_calendars_js' );
         ob_start();
 
-        $base_url = admin_url("admin-ajax.php");
         $calendar_id = md5($this->getArgs()["unit"]);
         
-        $holray_url = \Holray\Plugin\Util\Url::getCustBookUrl();
-
         include_once HOLRAY_UNITS_PATH . "src/views/shortcodes/calendar.php";
         $contents = ob_get_clean();
         return $contents;
