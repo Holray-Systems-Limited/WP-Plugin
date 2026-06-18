@@ -242,6 +242,9 @@ class Plugin {
     {
         wp_enqueue_script( 'holray_js', HOLRAY_UNITS_URL . '/src/js/holray.js', false, HOLRAY_UNITS_VERSION, true );
         wp_register_script( 'holray_calendars_js', HOLRAY_UNITS_URL . '/src/js/holray-calendars.js', false, HOLRAY_UNITS_VERSION, true );
+        $cal_settings = array('base_url' => admin_url("admin-ajax.php"), 'book_url' => \Holray\Plugin\Util\Url::getCustBookUrl());
+        wp_localize_script( 'holray_calendars_js', 'holray_calendar_settings', $cal_settings );
+
     }
     
 }
